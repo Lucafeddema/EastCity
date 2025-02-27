@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff Panel</title>
+</head>
+<body>
+    <h1>Welkom in het Staff Panel</h1>
+    <p>Alleen beschikbaar voor Staff en Eigenaren.</p>
+
+    <script>
+        // Controleer rol en geef toegang of toon bericht
+        const gebruiker = JSON.parse(sessionStorage.getItem('gebruiker'));
+        if (!gebruiker || (gebruiker.rol !== 'Staff' && gebruiker.rol !== 'Eigenaar')) {
+            alert('Je hebt geen toegang tot dit panel!');
+            window.location.href = 'home.html'; // Verwijs terug naar de homepagina
+        }
+    </script>
+</body>
+</html>

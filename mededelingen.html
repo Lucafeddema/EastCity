@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mededelingen</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        nav {
+            background-color: #333;
+            padding: 15px 10px;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-size: 18px;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        .content {
+            padding: 20px;
+            text-align: center;
+        }
+        .mededeling {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navigatie -->
+<nav>
+    <a href="informatie.html">Informatie</a>
+    <a href="reglementen.html">Regels</a>
+    <a href="mededelingen.html">Mededelingen</a>
+    <a href="#" onclick="logout()">Logout</a>
+</nav>
+
+<!-- Mededelingen Sectie -->
+<div class="content">
+    <h2>Mededelingen</h2>
+    <div id="mededelingenList"></div>
+</div>
+
+<!-- Footer -->
+<footer>
+    <p>&copy; 2025 Mijn Server Alle rechten voorbehouden.</p>
+</footer>
+
+<script>
+    // Dummy data voor mededelingen
+    const mededelingen = [
+        { text: "Server onderhoud gepland voor 10 februari 2025", datum: "01-02-2025" },
+        { text: "Nieuwe update! Bekijk de nieuwe functies.", datum: "10-02-2025" }
+    ];
+
+    // Toon mededelingen
+    function toonMededelingen() {
+        const mededelingenList = document.getElementById('mededelingenList');
+        mededelingenList.innerHTML = '';
+        mededelingen.forEach(m => {
+            const mededelingDiv = document.createElement('div');
+            mededelingDiv.classList.add('mededeling');
+            mededelingDiv.innerHTML = `<strong>${m.datum}</strong>: ${m.text}`;
+            mededelingenList.appendChild(mededelingDiv);
+        });
+    }
+
+    // Logout functie
+    function logout() {
+        sessionStorage.removeItem('gebruiker');
+        alert('Je bent uitgelogd');
+        window.location.href = "informatie.html";  // Redirect naar de informatiepagina na uitloggen
+    }
+
+    // Start de pagina
+    window.onload = function() {
+        toonMededelingen();
+    };
+</script>
+
+</body>
+</html>

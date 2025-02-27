@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eastcity Roleplay - Informatie</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        nav {
+            background-color: #333;
+            padding: 15px 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        nav img {
+            width: 50px;
+        }
+        .nav-links {
+            display: flex;
+            justify-content: space-between;
+            width: 50%;
+        }
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            margin: 0 15px;
+        }
+        .nav-links a:hover {
+            text-decoration: underline;
+        }
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #333;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .dropdown-content a {
+            color: white;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+        .dropdown-content a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+        .content {
+            padding: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            margin-top: 50px;
+        }
+        footer a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+        .home-page {
+            text-align: center;
+            padding: 50px;
+        }
+        .home-page h1 {
+            font-size: 3em;
+            color: #333;
+        }
+        .home-page p {
+            font-size: 1.2em;
+            color: #555;
+        }
+        #loginPage {
+            display: none;
+        }
+        #loginPage input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 16px;
+        }
+        #loginPage button {
+            width: 100%;
+            padding: 12px;
+            font-size: 18px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        #loginPage button:hover {
+            background-color: #45a049;
+        }
+        .home-page h2, .home-page p {
+            margin: 20px 0;
+        }
+        .chat-box {
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin-top: 20px;
+            background-color: #f9f9f9;
+            max-height: 400px;
+            overflow-y: scroll;
+        }
+        .chat-message {
+            padding: 8px;
+            margin-bottom: 5px;
+            border-bottom: 1px solid #ccc;
+        }
+        .chat-input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+        }
+        #chatForm {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navigatie Menu -->
+<nav>
+    <img src="logo.png" alt="Logo">
+    <div class="nav-links">
+        <a href="#" onclick="toonPagina('home')">Home</a>
+        <a href="#" onclick="toonPagina('mededelingen')">Mededelingen</a>
+        <a href="#" onclick="toonPagina('reglementen')">Regels</a>
+        <a href="#" onclick="toonPagina('contact')">Contact</a>
+    </div>
+    <div class="dropdown">
+        <button class="dropbtn" id="loginLink" onclick="toonPagina('loginPage')">Login</button>
+        <div class="dropdown-content" id="dropdownMenu">
+            <a href="#" id="logoutBtn" style="display:none;" onclick="logout()">Logout</a>
+            <a href="#" onclick="toonPagina('staffpanel')">Staff Panel</a>
+            <a href="#" onclick="toonPagina('eigenaarpanel')">Eigenaar Panel</a>
+        </div>
+    </div>
+</nav>
+
+<!-- Home Pagina -->
+<div id="home" class="home-page">
+    <h1>Welkom bij Eastcity Roleplay!</h1>
+    <p>De ultieme plek voor gaming, community en plezier. Maak nieuwe vrienden, verbeter je skills, en geniet van een geweldige tijd op onze server!</p>
+    <h2>Server Informatie:</h2>
+    <ul>
+        <li>Server Type: FiveM</li>
+        <li>Beveiliging: Sterk en betrouwbaar</li>
+        <li>Actieve Community: We hebben een grote en actieve community!</li>
+    </ul>
+    <h3>Wat maakt onze server uniek?</h3>
+    <p>Onze server biedt geweldige rolspelervaringen en heeft een sterke focus op gemeenschap en veiligheid. Sluit je aan bij ons en geniet van de vele mogelijkheden die we bieden!</p>
+</div>
+
+<!-- Login Pagina -->
+<div id="loginPage" class="content" style="display:none;">
+    <h2>Inloggen</h2>
+    <input type="text" id="naam" placeholder="Gebruikersnaam" required>
+    <input type="password" id="wachtwoord" placeholder="Wachtwoord" required>
+    <button onclick="login()">Login</button>
+</div>
+
+<!-- Mededelingen Pagina -->
+<div id="mededelingen" class="content" style="display:none;">
+    <h2>Mededelingen</h2>
+    <p>Alle mededelingen worden hier weergegeven.</p>
+    <div id="mededelingenLijst">
+        <!-- Hier zullen de mededelingen worden getoond -->
+    </div>
+</div>
+
+<!-- Reglementen Pagina -->
+<div id="reglementen" class="content" style="display:none;">
+    <h2>Regels</h2>
+    <p>De regels van de server worden hier weergegeven.</p>
+    <ul>
+        <li>Regel 1: Wees vriendelijk</li>
+        <li>Regel 2: Geen spam</li>
+        <li>Regel 3: Geen hacks of cheats gebruiken</li>
+    </ul>
+</div>
+
+<!-- Contact Pagina -->
+<div id="contact" class="content" style="display:none;">
+    <h2>Contact</h2>
+    <p>Neem contact met ons op via email: <a href="mailto:informatie.eastcity@bolthost.nl">informatie.eastcity@bolthost.nl <a </p>
+</div>
+
+<!-- Staff Panel -->
+<div id="staffpanel" class="content" style="display:none;">
+    <h2>Welkom bij het Staff Panel</h2>
+    <p>Hier kunnen staffleden communiceren en beheertaken uitvoeren.</p>
+    <div class="chat-box" id="staffChat">
+        <!-- Hier komen de chatberichten -->
+    </div>
+    <div id="chatForm">
+        <textarea class="chat-input" id="staffMessage" placeholder="Typ een bericht..."></textarea>
+        <button onclick="verstuurStaffBericht()">Verstuur Bericht</button>
+    </div>
+</div>
+
+<!-- Eigenaar Panel -->
+<div id="eigenaarpanel" class="content" style="display:none;">
+    <h2>Welkom bij het Eigenaar Panel</h2>
+    <p>Als eigenaar heb je volledige controle over de server, inclusief het plaatsen van mededelingen!</p>
+    <button onclick="toonMededelingForm()">Plaats Mededeling</button>
+    <div id="mededelingForm" style="display:none;">
+        <textarea id="mededelingText" rows="4" cols="50" placeholder="Typ hier je mededeling..."></textarea><br>
+        <button onclick="verstuurMededeling()">Verstuur Mededeling</button>
+    </div>
+    <div class="chat-box" id="eigenaarChat">
+        <!-- Hier komen de chatberichten -->
+    </div>
+    <div id="chatForm">
+        <textarea class="chat-input" id="eigenaarMessage" placeholder="Typ een bericht..."></textarea>
+        <button onclick="verstuurEigenaarBericht()">Verstuur Bericht</button>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer>
+    <p>&copy; 2025 Eastcity Roleplay Alle rechten voorbehouden.</p>
+    <a href="#">Privacybeleid</a>
+    <a href="#">Contact</a>
+</footer>
+
+<script>
+    // Dummy gebruikersdata
+    const users = [
+        { naam: "Luca", wachtwoord: "1221", rol: "Eigenaar" },
+        { naam: "staff", wachtwoord: "wachtwoord123", rol: "Staff" }
+    ];
+
+    const mededelingen = [];
+    const staffChat = [];
+    const eigenaarChat = [];
+
+    // Toon de juiste pagina (Home, Mededelingen, Reglementen, Contact)
+    function toonPagina(pagina) {
+        const gebruiker = JSON.parse(sessionStorage.getItem('gebruiker'));
+
+        // Verberg alle pagina's eerst
+        document.getElementById('home').style.display = 'none';
+        document.getElementById('mededelingen').style.display = 'none';
+        document.getElementById('reglementen').style.display = 'none';
+        document.getElementById('contact').style.display = 'none';
+        document.getElementById('staffpanel').style.display = 'none';
+        document.getElementById('eigenaarpanel').style.display = 'none';
+        document.getElementById('loginPage').style.display = 'none';
+
+        // Toon de juiste pagina afhankelijk van de geselecteerde pagina
+        if (pagina === 'home') {
+            document.getElementById('home').style.display = 'block';
+        } else if (pagina === 'mededelingen') {
+            document.getElementById('mededelingen').style.display = 'block';
+        } else if (pagina === 'reglementen') {
+            document.getElementById('reglementen').style.display = 'block';
+        } else if (pagina === 'contact') {
+            document.getElementById('contact').style.display = 'block';
+        } else if (pagina === 'loginPage') {
+            document.getElementById('loginPage').style.display = 'block';
+            document.getElementById('logoutBtn').style.display = 'none'; // Verberg de logout knop op de loginpagina
+        }
+
+        // Als er een gebruiker is, laat het juiste panel zien
+        if (gebruiker) {
+            if (gebruiker.rol === "Staff" && pagina === "staffpanel") {
+                document.getElementById('staffpanel').style.display = 'block';
+                document.getElementById('logoutBtn').style.display = 'block';
+                toonChat("staff");
+            } else if (gebruiker.rol === "Eigenaar" && pagina === "eigenaarpanel") {
+                document.getElementById('eigenaarpanel').style.display = 'block';
+                document.getElementById('logoutBtn').style.display = 'block';
+                toonChat("eigenaar");
+            }
+        }
+    }
+
+    // Login functie
+    function login() {
+        const naam = document.getElementById('naam').value;
+        const wachtwoord = document.getElementById('wachtwoord').value;
+
+        const gebruiker = users.find(user => user.naam === naam && user.wachtwoord === wachtwoord);
+
+        if (gebruiker) {
+            sessionStorage.setItem('gebruiker', JSON.stringify(gebruiker));
+            alert('Inloggen gelukt!');
+            toonPagina(gebruiker.rol === "Staff" ? "staffpanel" : "eigenaarpanel");
+            document.getElementById('loginLink').style.display = 'none';
+            document.getElementById('logoutBtn').style.display = 'block';
+        } else {
+            alert('Foutieve gebruikersnaam of wachtwoord.');
+        }
+    }
+
+    // Logout functie
+    function logout() {
+        sessionStorage.removeItem('gebruiker');
+        alert('Uitgelogd!');
+        toonPagina('home');
+        document.getElementById('logoutBtn').style.display = 'none';
+        document.getElementById('loginLink').style.display = 'inline';
+    }
+
+    // Chat weergeven
+    function toonChat(rol) {
+        const chatBox = rol === "staff" ? document.getElementById('staffChat') : document.getElementById('eigenaarChat');
+        const chatArray = rol === "staff" ? staffChat : eigenaarChat;
+        chatBox.innerHTML = '';
+        chatArray.forEach(msg => {
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('chat-message');
+            messageDiv.innerHTML = `<strong>${msg.user} (${msg.rank})</strong><br>${msg.message}`;
+            chatBox.appendChild(messageDiv);
+        });
+    }
+
+    // Bericht versturen (Staff)
+    function verstuurStaffBericht() {
+        const gebruiker = JSON.parse(sessionStorage.getItem('gebruiker'));
+        const message = document.getElementById('staffMessage').value;
+        if (message) {
+            staffChat.push({ user: gebruiker.naam, rank: gebruiker.rol, message: message });
+            document.getElementById('staffMessage').value = '';
+            toonChat("staff");
+        }
+    }
+
+    // Bericht versturen (Eigenaar)
+    function verstuurEigenaarBericht() {
+        const gebruiker = JSON.parse(sessionStorage.getItem('gebruiker'));
+        const message = document.getElementById('eigenaarMessage').value;
+        if (message) {
+            eigenaarChat.push({ user: gebruiker.naam, rank: gebruiker.rol, message: message });
+            document.getElementById('eigenaarMessage').value = '';
+            toonChat("eigenaar");
+        }
+    }
+
+    // Mededeling versturen
+    function verstuurMededeling() {
+        const mededeling = document.getElementById('mededelingText').value;
+        if (mededeling) {
+            mededelingen.push(mededeling);
+            document.getElementById('mededelingText').value = '';
+            document.getElementById('mededelingenLijst').innerHTML = mededelingen.join('<br>');
+        }
+    }
+
+    // Toon Mededeling form voor eigenaar
+    function toonMededelingForm() {
+        document.getElementById('mededelingForm').style.display = 'block';
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regels</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        nav {
+            background-color: #333;
+            padding: 15px 10px;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-size: 18px;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        .content {
+            padding: 20px;
+            text-align: center;
+        }
+        .regels-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .regels-list li {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navigatie -->
+<nav>
+    <a href="informatie.html">Informatie</a>
+    <a href="reglementen.html">Regels</a>
+    <a href="mededelingen.html">Mededelingen</a>
+    <a href="#" onclick="logout()">Logout</a>
+</nav>
+
+<!-- Regels Sectie -->
+<div class="content">
+    <h2>Regels van de Server</h2>
+    <ul class="regels-list">
+        <li>1: Je beledigt geen staff/members.</li>
+        <li>2: Je scheldt niet met hedendaagse ziektes.</li>
+        <li>3: Gebruik de kanalen waar ze voor bedoeld zijn.</li>
+        <li>4: Tag geen staff indien niet nodig.</li>
+        <li>5: Je maakt geen racistische opmerkingen.</li>
+        <li>6: Niet spammen.</li>
+        <li>7: Geen zelfpromotie.</li>
+        <li>8: Luister naar mensen met een functie (staff of hoger).</li>
+        <li>9: Geen 18+ content.</li>
+    </ul>
+</div>
+
+<!-- Footer -->
+<footer>
+    <p>&copy; 2025 Mijn Server Alle rechten voorbehouden.</p>
+</footer>
+
+<script>
+    // Logout functie
+    function logout() {
+        sessionStorage.removeItem('gebruiker');
+        alert('Je bent uitgelogd');
+        window.location.href = "informatie.html";  // Redirect naar de informatiepagina na uitloggen
+    }
+</script>
+
+</body>
+</html>

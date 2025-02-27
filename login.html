@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Mijn Server</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .login-form {
+            max-width: 400px;
+            margin: 100px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .login-form input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+        }
+        .login-form button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4e73df;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .login-form button:hover {
+            background-color: #3a60d6;
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-form">
+    <h2>Inloggen</h2>
+    <input type="text" id="naam" placeholder="Gebruikersnaam" required>
+    <input type="password" id="wachtwoord" placeholder="Wachtwoord" required>
+    <button onclick="login()">Inloggen</button>
+</div>
+
+<script>
+    // Dummy gebruikersdata (in echte situatie zou dit van een server komen)
+    const users = [
+        { naam: "Luca", wachtwoord: "1221", rol: "Eigenaar" },
+        { naam: "staff", wachtwoord: "wachtwoord123", rol: "Staff" }
+    ];
+
+    // Login functie
+    function login() {
+        const naam = document.getElementById('naam').value;
+        const wachtwoord = document.getElementById('wachtwoord').value;
+
+        const gebruiker = users.find(user => user.naam === naam && user.wachtwoord === wachtwoord);
+
+        if (gebruiker) {
+            sessionStorage.setItem('gebruiker', JSON.stringify(gebruiker));
+            alert('Inloggen gelukt!');
+            window.location.href = 'home.html'; // Verwijs naar de homepagina
+        } else {
+            alert('Ongeldige naam of wachtwoord!');
+        }
+    }
+</script>
+
+</body>
+</html>
